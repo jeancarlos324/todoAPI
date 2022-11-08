@@ -1,9 +1,10 @@
 const express = require("express");
 const initModels = require("./models/initModels");
 const db = require("./utils/database");
+require("dotenv").config();
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 //sync db
 db.authenticate()
