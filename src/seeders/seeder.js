@@ -46,6 +46,18 @@ const categories = [
   { name: "financiero" },
 ];
 
+const taskCategories = [
+  { taskId: 1, categoryId: 1 },
+  { taskId: 1, categoryId: 2 },
+  { taskId: 1, categoryId: 4 },
+  { taskId: 2, categoryId: 1 },
+  { taskId: 2, categoryId: 3 },
+  { taskId: 2, categoryId: 6 },
+  { taskId: 2, categoryId: 7 },
+  { taskId: 3, categoryId: 1 },
+  { taskId: 3, categoryId: 3 },
+];
+
 db.sync({ force: true })
   .then(async () => {
     console.log("Init seed");

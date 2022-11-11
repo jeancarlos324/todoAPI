@@ -1,48 +1,27 @@
-const { text } = require("express");
-const e = require("express");
+dataApi = [
+  { name: "hola", edad: 18 },
+  { name: "jhon", edad: 20 },
+  { name: "pedro", edad: 10 },
+  { name: "maria", edad: 10 },
+  { name: "juancho", edad: 10 },
+];
 
-const objectA = {
-  id: 1,
-  name: "jose",
-  first_name: "jose",
-  last_name: "Perez",
-  address: "jr.jose",
-  price: "123",
-  status: true,
-  isAvailable: false,
-};
+dataBase = [
+  { name: "hola", edad: 18 },
+  { name: "pedro", edad: 20 },
+];
 
-const objectB = {
-  name: "",
-  first_name: "",
-  address: "",
-  price: "",
-  status: false,
-};
+function filterData(dataApi, dataBase) {
+  let arrayFilter = [];
+  const newArrayString = dataBase.map((data) => JSON.stringify(data));
+  console.log(newArrayString);
 
-const newObject = {
-  name: objectA.name,
-  first_name: objectA.first_name,
-  address: objectA.address,
-  price: objectA.price,
-  status: objectA.status,
-};
+  for (daA of dataApi) {
+    if (!newArrayString.includes(JSON.stringify(daA))) {
+      arrayFilter.push(daA);
+    }
+  }
+  return arrayFilter;
+}
 
-const keyObjectB = Object.keys(objectB);
-const newArray = keyObjectB.map((key) => [key, objectA[key]]);
-const newObject2 = Object.fromEntries(newArray);
-
-// console.log(newObject);
-// console.log(keyObjectB);
-console.log(newObject2);
-
-const [form, setForm] = useState({});
-
-const handleChangeForm = ({ target }, textField) => {
-  const { value } = target;
-  setForm({ ...form, [textField]: value });
-};
-
-// onChange((event) => {
-//   handleChangeForm(event, name);
-// });
+console.log(filterData(dataApi, dataBase));
