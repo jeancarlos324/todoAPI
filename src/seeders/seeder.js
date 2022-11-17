@@ -1,6 +1,7 @@
 const Addresses = require("../models/addresses.model");
 const Categories = require("../models/categories.modules");
 const initModels = require("../models/initModels");
+const TaskCategories = require("../models/taskcategories.models");
 const Task = require("../models/tasks.models");
 const Users = require("../models/users.models");
 const db = require("../utils/database");
@@ -62,15 +63,18 @@ db.sync({ force: true })
   .then(async () => {
     console.log("Init seed");
     users.forEach((user) => Users.create(user));
-  })
-  .then(() => {
-    categories.forEach((category) => Categories.create(category));
-  })
-  .then(() => {
-    tasks.forEach((task) => Task.create(task));
-  })
-  .then(() => {
-    addresses.forEach((address) => Addresses.create(address));
+    setTimeout(() => {
+      categories.forEach((category) => Categories.create(category));
+    }, 100);
+    setTimeout(() => {
+      tasks.forEach((task) => Task.create(task));
+    }, 200);
+    setTimeout(() => {
+      addresses.forEach((address) => Addresses.create(address));
+    }, 300);
+    setTimeout(() => {
+      taskCategories.forEach((tc) => TaskCategories.create(tc));
+    }, 400);
   })
   .catch((error) => {
     console.log(error);

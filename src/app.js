@@ -3,10 +3,22 @@ const initModels = require("./models/initModels");
 const db = require("./utils/database");
 
 const userRoutes = require("./Routes/users.routes");
+const taskRoutes = require("./Routes/task.routes");
+const authRoutes = require("./Routes/auth.routes");
+
+const morgan = require("morgan");
+const logs = require("./Middlewars/requestLogs");
+const handleError = require("./Middlewars/handleErrors");
 
 require("dotenv").config();
 
 const app = express();
+
+app.use(express.json());
+app.use(logs);
+
+app.use(morgan("dev"));
+
 const PORT = process.env.PORT;
 
 //sync db
@@ -20,12 +32,18 @@ db.sync({ force: false })
 
 initModels();
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "ok" });
+app.get("/", (request, response, next) => {
+  response.status(200).json({ message: "ok" });
+  next();
 });
 
 //midleware
 app.use("/api/v1", userRoutes);
+app.use("/api/v1", taskRoutes);
+app.use("/api/v1", authRoutes);
+// app.use("/api/v1", tasksRoutes);
+
+app.use(handleError);
 
 app.listen(PORT, () => {
   console.log(`Server is running in port ${PORT}`);

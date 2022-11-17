@@ -19,7 +19,7 @@ const initModels = () => {
   // Categories.belongsToMany(Task, { through: "task_categories" });
 
   Task.hasMany(TaskCategories, { as: "categories", foreignKey: "task_id" });
-  TaskCategories.belongsTo(Task, { as: "todos", foreignKey: "id" });
+  TaskCategories.belongsTo(Task, { as: "todos", foreignKey: "task_id" });
 
   Categories.hasMany(TaskCategories, {
     as: "todos",
@@ -27,7 +27,7 @@ const initModels = () => {
   });
   TaskCategories.belongsTo(Categories, {
     as: "category",
-    foreignKey: "id",
+    foreignKey: "category_id",
   });
 };
 

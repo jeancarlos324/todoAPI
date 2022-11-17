@@ -72,6 +72,26 @@ class UsersServices {
       throw error;
     }
   }
+
+  static async add(newUser) {
+    try {
+      const query = await Users.create(newUser);
+      return query;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async update(updateData, id) {
+    try {
+      const query = await Users.update(updateData, {
+        where: { id },
+      });
+      return query;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = UsersServices;
