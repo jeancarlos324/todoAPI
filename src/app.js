@@ -9,7 +9,7 @@ const authRoutes = require("./Routes/auth.routes");
 const morgan = require("morgan");
 const logs = require("./Middlewars/requestLogs");
 const handleError = require("./Middlewars/handleErrors");
-
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(logs);
 
 app.use(morgan("dev"));
-
+app.use(cors());
 const PORT = process.env.PORT;
 
 //sync db
